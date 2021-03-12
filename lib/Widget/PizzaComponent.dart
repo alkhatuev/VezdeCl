@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:client/Widget/VZButton.dart';
-
-
 class PizzaComponent extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
@@ -46,7 +44,6 @@ class PizzaComponent extends StatelessWidget{
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-
                         Text(
                           "Пицца LAVAKADO",
                           style: TextStyle(
@@ -60,7 +57,6 @@ class PizzaComponent extends StatelessWidget{
                         ),
                       ],
                     ),
-
                   ))
             ],
           ),

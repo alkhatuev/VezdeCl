@@ -32,12 +32,13 @@ class _VZButtonState extends State<VZButton> {
         stream: opacityController.stream,
         builder: (context, opacity) {
           return Container(
-              height: 48,
+              width: 130,
+              height: 39,
               decoration: BoxDecoration(
                   color: Colors.grey[200].withOpacity(opacity.data),
                   borderRadius: BorderRadius.all(Radius.circular(8))),
               child: Center(
-                child: Text(widget.text),
+                child: Text('В корзину'),
               ));
         },
       ),

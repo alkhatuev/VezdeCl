@@ -1,107 +1,27 @@
-import 'dart:io';
-
 import 'package:client/pages/Home.dart';
 import 'package:client/pages/Menu.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:client/pages/SplashScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/widgets.dart';
 
+// Запуск приложения
+void main() => runApp(MyApp());
 
-import 'pages/Home.dart';
-
-
-
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  runApp(MyApp());
-}
-
+// Основной виджет приложения
 class MyApp extends StatelessWidget {
-
-  dynamic getRoute({ Widget widget, bool fullscreenDialog = false , String name}) {
-    if (Platform.isAndroid) {
-      return MaterialPageRoute(
-          builder: (context) => widget, fullscreenDialog:fullscreenDialog, settings: RouteSettings(name: name));
-    } else {
-      return CupertinoPageRoute(
-          builder: (context) => widget, fullscreenDialog:fullscreenDialog, settings: RouteSettings(name: name));
-    }
-  }
-
+  // Формируем маршрутизацию приложения
+  final routes = <String, WidgetBuilder>{
+    // Путь, по которому создаётся Home Screen
+    '/Menu': (BuildContext context) => Menu()
+  };
+  // Необходимо переопределить метод строительства инстанса виджета
   @override
   Widget build(BuildContext context) {
+    // Это будет приложение с поддержкой Material Design
     return MaterialApp(
-      color: Colors.black,
-      title: 'Vezde',
-      initialRoute: '/main',
-      onGenerateRoute: (RouteSettings settings) {
-        switch (settings.name) {
-          
-          case "/main":
-            return getRoute(widget: Home(), name: "/main");
-          case "/menu":
-            return getRoute(widget: Menu(), name: "/menu");
-
-        }
-        return CupertinoPageRoute(
-            builder: (context) => Home());
-      },
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        appBarTheme: const AppBarTheme(
-          color: Colors.blueAccent,
-          textTheme: TextTheme(
-            headline6: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w300,
-              fontSize: 20.0,
-            ),
-          ),
-        ),
-        iconTheme: const IconThemeData(
-          color: Colors.blueAccent,
-        ),
-      ),
-      debugShowCheckedModeBanner: false,
+      // в котором будет Splash Screen с указанием следующего маршрута
+      home: SplashScreen(nextRoute: '/Menu'),
+      // передаём маршруты в приложение
+      routes: routes,
     );
-
-
-//      MultiBlocProvider(
-//      providers: [
-//      ],
-//      child: MaterialApp(
-//        color: Colors.black,
-//        title: 'Vezde',
-//        initialRoute: '/main',
-//        onGenerateRoute: (RouteSettings settings) {
-//          switch (settings.name) {
-//            case "/main":
-//              return getRoute(widget: Home(), name: "/main");
-//          }
-//          return CupertinoPageRoute(
-//              builder: (context) => Home());
-//        },
-//        theme:
-//        ThemeData(
-//          primarySwatch: Colors.blue,
-//          appBarTheme: const AppBarTheme(
-//            color: Colors.blueAccent,
-//            textTheme: TextTheme(
-//              headline6: TextStyle(
-//                color: Colors.white,
-//                fontWeight: FontWeight.w300,
-//                fontSize: 20.0,
-//              ),
-//            ),
-//          ),
-//          iconTheme: const IconThemeData(
-//            color: Colors.blueAccent,
-//          ),
-//        ),
-//        debugShowCheckedModeBanner: false,
-//      ),
-//    );
   }
 }

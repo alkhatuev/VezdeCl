@@ -53,6 +53,7 @@ flutter:
   assets:
     - image/pizza.png
     - image/IMG_7020.png
+    - image/vezde.png
 
 # image:
  #   - image/
